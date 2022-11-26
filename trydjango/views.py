@@ -3,6 +3,7 @@ To render html web pages
 """
 from django.http import HttpResponse
 from articles.models import Article
+from django.template.loader import render_to_string
 import random
 
 
@@ -18,12 +19,20 @@ def home_view(request):
     article_obj = Article.objects.get(id=random_id)
     article_title = article_obj.title
     article_content = article_obj.content
-    
-    H1_STRING = f"""
-    <h1>{article_title} (id: {article_obj.id})!</h1>
-    """
-    P_STRING = f"""
-    <p>{article_content}!</p>
-    """
-    HTML_STRING = H1_STRING + P_STRING
+    context = {
+        "object": article_obj,
+        "id": article_obj.id,
+        "title": article_title,
+        "content": article_content,
+    }
+
+    # Django Templates
+    HTML_STRING = render_to_string(
+        "home-view.html",
+        context=context,
+    )
+    # HTML_STRING = """
+    # <h1>{title} (id: {id})!</h1>
+    # <p>{content}!</p>
+    # """.format(**context)
     return HttpResponse(HTML_STRING)
