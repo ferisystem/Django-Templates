@@ -19,7 +19,9 @@ def home_view(request):
     article_obj = Article.objects.get(id=random_id)
     article_title = article_obj.title
     article_content = article_obj.content
+    article_querysets = Article.objects.all()
     context = {
+        "object_list": article_querysets,
         "object": article_obj,
         "id": article_obj.id,
         "title": article_title,
