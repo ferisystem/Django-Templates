@@ -5,6 +5,10 @@
     </head>
     <body>
         <h1>Hello Human</h1>
+        <form action="/articles/" method="GET">
+            <input type="text" name="q" />
+            <input type="submit" />
+        </form>
         {% block content %}
         {% endblock content %}
 
