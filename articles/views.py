@@ -25,6 +25,26 @@ def article_search_view(request):
     )
 
 
+def article_create_view(request):
+    context = {}
+    if request.method == "POST":
+        title = request.POST.get("title")
+        content = request.POST.get("content")
+        article_obj = Article.objects.create(
+            title = title,
+            content = content,
+        )
+        context = {
+            'object': article_obj,
+            'created': True,
+        }
+    return render(
+        request,
+        "articles/create.html",
+        context=context
+    )
+
+
 def article_detail_view(request, id=None):
     article_obj = None
     if id is not None:
