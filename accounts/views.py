@@ -1,5 +1,12 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.contrib.auth import (
+    authenticate,
+    login,
+    logout,
+)
+from django.shortcuts import (
+    render,
+    redirect,
+)
 
 # Create your views here.
 def signin_view(request):
@@ -16,6 +23,9 @@ def signin_view(request):
 
 
 def signout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect("/login/")
     return render(request, "accounts/signout.html", {})
 
 
