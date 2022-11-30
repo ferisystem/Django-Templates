@@ -34,4 +34,5 @@ urlpatterns = [
     path('articles/create/', article_create_view),
     path('admin/', admin.site.urls),
     path('login/', signin_view),
+    path('logout/', signout_view),
 ]
