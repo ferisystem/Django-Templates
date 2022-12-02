@@ -36,7 +36,9 @@ def article_create_view(request):
     if form.is_valid():
         article_obj = form.save()
         context = {
-            'form': ArticleForm()
+            'form': ArticleForm(),
+            'created': True,
+            'object': article_obj,
         }
     return render(
         request,
