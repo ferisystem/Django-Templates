@@ -1,6 +1,26 @@
 from django import forms
+from .models import Article
 
-class ArticleForm(forms.Form):
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ["title", "content"]
+    
+    def clean(self):
+        data = self.cleaned_data
+        title = data.get("title")
+        content = data.get("content")
+        qs = Article.objects.filter(title__icontains=title)
+        qs2 = Article.objects.filter(content__icontains=content)
+        if qs.exists():
+            self.add_error("title", f"\"{title}\" already taken! use another one.")
+        if qs2.exists():
+            self.add_error("title", f"\"{content}\" already taken! use another one.")
+        return data
+
+
+class ArticleFormOld(forms.Form):
     title = forms.CharField()
     content = forms.CharField()
 
