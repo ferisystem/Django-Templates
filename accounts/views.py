@@ -7,6 +7,8 @@ from django.shortcuts import (
     render,
     redirect,
 )
+from django.contrib.auth.forms import UserCreationForm
+
 
 # Create your views here.
 def signin_view(request):
@@ -30,4 +32,9 @@ def signout_view(request):
 
 
 def signup_view(request):
-    return render(request, "accounts/signout.html", {})
+    form = UserCreationForm(request.POST or None)
+    if form.is_valid():
+        user_obj = form.save()
+        return redirect("/login/")
+    context = {"form": form}
+    return render(request, "accounts/signup.html", context)
