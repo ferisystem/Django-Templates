@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 
 # Create your models here.
 class Article(models.Model):
@@ -14,3 +15,8 @@ class Article(models.Model):
         null=True,
         blank=True
     ) # you can use "default=timezone.now" too
+
+    def save(self, *args, **kwargs):
+        if self.slug is None:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
