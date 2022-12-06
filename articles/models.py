@@ -35,7 +35,7 @@ def slugify_instance_title(instance, save=False, new_slug=None):
     if qs.exists():
         rand_int = random.randint(100, 10_000)
         slug = f"{slug}-{rand_int}"
-        return slugify_instance_title(instance, save=save, new_slug=slug):
+        return slugify_instance_title(instance, save=save, new_slug=slug)
     instance.slug = slug
     if save:
         instance.save()
