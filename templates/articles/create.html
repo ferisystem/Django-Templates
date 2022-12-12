@@ -12,6 +12,6 @@
     </div>
 {% else %}
 <p>Your Article was created.</p>
-<a href="/articles/{{ object.id }}/">{{ object.title }} - {{ object.content }}</a>
+<a href="/articles/{{ object.slug }}/">{{ object.title }} - {{ object.content }}</a>
 {% endif %}
 {% endblock content %}
