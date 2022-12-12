@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Article
 from django.contrib.auth.decorators import login_required
 from .forms import ArticleForm
@@ -41,6 +41,8 @@ def article_create_view(request):
             'created': True,
             'object': article_obj,
         }
+        # return redirect("article-detail", slug=article_obj.slug) # way 1st
+        return redirect(article_obj.get_absolute_url()) # better way
     return render(
         request,
         "articles/create.html",
