@@ -7,7 +7,7 @@
 <ul>
     {% for x in object_list %}
         {% if x.title %}
-            <li><a href='/articles/{{ x.id }}'>Link</a> - {{ x.id }} - {{ x.title }} - {{ x.content }}</li>
+            <li><a href='/articles/{{ x.slug }}'>Link</a> - {{ x.id }} - {{ x.title }} - {{ x.content }}</li>
         {% endif %}
     {% endfor %}
 </ul>
