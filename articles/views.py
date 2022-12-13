@@ -3,23 +3,23 @@ from .models import Article
 from django.contrib.auth.decorators import login_required
 from .forms import ArticleForm
 from django.http import Http404
+from django.db.models import Q
 
 # Create your views here.
 def article_search_view(request):
     query_set = request.GET
     query = query_set.get('q')
-    article_obj = None
+    lookups = Q(title__icontains=query) | Q(content__icontains=query)
     if query is not None:
-        try:
-            article_obj = Article.objects.get(id=int(query))
-        except:
-            article_obj = {
-                "title": f"{query} Article Not Exist",
-                "content": f"{query} Article Not Exist",
-                "id": f"{query} Article Not Exist",
-            }
+        article_obj = Article.objects.filter(lookups)
+    if len(article_obj) == 0:
+        article_obj = {
+            "title": f"{query} Article Not Exist",
+            "content": f"{query} Article Not Exist",
+            "id": f"{query} Article Not Exist",
+        }
     context = {
-        "object": article_obj,
+        "object_list": article_obj,
     }
     return render(
         request,
