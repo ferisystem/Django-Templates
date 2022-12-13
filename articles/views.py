@@ -9,9 +9,8 @@ from django.db.models import Q
 def article_search_view(request):
     query_set = request.GET
     query = query_set.get('q')
-    lookups = Q(title__icontains=query) | Q(content__icontains=query)
-    if query is not None:
-        article_obj = Article.objects.filter(lookups)
+    article_obj = Article.objects.search(query=query)
+    print(article_obj)
     if len(article_obj) == 0:
         article_obj = {
             "title": f"{query} Article Not Exist",
