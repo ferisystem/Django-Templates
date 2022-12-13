@@ -8,8 +8,8 @@ class Recipe(models.Model):
     name = models.CharField(max_length=220)
     description = models.TextField(blank=True, null=True)
     directions = models.TextField(blank=True, null=True)
-    timestamp = models.DateTimeField(auto_now_add=True) 
-    updated = models.DateTimeField(auto_now=True) 
+    timestamp = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
 class RecipeIngredient(models.Model):
@@ -19,6 +19,6 @@ class RecipeIngredient(models.Model):
     quanity = models.CharField(max_length=50)  # 1 1/4
     unit = models.CharField(max_length=50) # pounds, lbs, oz, gram, etc
     directions = models.TextField(blank=True, null=True)
-    timestamp = models.DateTimeField(auto_now_add=True) 
-    updated = models.DateTimeField(auto_now=True) 
+    timestamp = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
